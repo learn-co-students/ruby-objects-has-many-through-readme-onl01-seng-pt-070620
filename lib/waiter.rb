@@ -3,7 +3,7 @@ class Waiter
 
     @@all = []
 
-    def initialize(name, yrs_experience)
+    def initialize(nam, yrs_experience)
         @name = name
         @yrs_experience = yrs_experience
         @@all << self
@@ -18,14 +18,16 @@ class Waiter
     end
 
     def meals
-        Meal.all.select {|meal| meal.waiter == self}
+        Meal.all.select do |meal|
+            meal.waiter == self
+        end
     end
 
     def best_tipper
         best_tipped_meal = meals.max do |meal_a, meal_b|
-          meal_a.tip <=> meal_b.tip
+            meal_a.tip <=> meal_b.tip
         end
-       
         best_tipped_meal.customer
     end
+
 end
